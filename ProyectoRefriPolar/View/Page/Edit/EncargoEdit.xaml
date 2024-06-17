@@ -1,0 +1,181 @@
+﻿<UserControl x:Class="ProyectoRefriPolar.View.Page.Edit.EncargoEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:validation="clr-namespace:ProyectoRefriPolar.Validaciones"
+             xmlns:local="clr-namespace:ProyectoRefriPolar.View.Page.Edit"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="seleccionarButton" TargetType="{x:Type Button}">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=NuevoEncargo.Tipo}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White" VerticalAlignment="Center">
+            <Label Content="Editar encargo" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   FontSize="50" 
+                   FontFamily="Manrope"/>
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                     materialDesign:HintAssist.Hint="Titulo" 
+                     Margin="5"  
+                     Width="350"
+                     FontFamily="Manrope">
+                <Binding Path="EncargoSeleccionado.nombre" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:EmptyValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <ComboBox ItemsSource="{Binding Path=ListaClientes}" 
+                      SelectedItem="{Binding Path=EncargoSeleccionado.idCliente}" 
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                      materialDesign:HintAssist.Hint="Cliente" 
+                      Margin="5" 
+                      Width="350"
+                      FontFamily="Manrope">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding nombre}" FontFamily="Manrope"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox ItemsSource="{Binding Path=ListaTipos}"
+                      Text="{Binding Path=EncargoSeleccionado.tipo}" 
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                      materialDesign:HintAssist.Hint="Tipo" 
+                      Margin="5" 
+                      Width="350"
+                      FontFamily="Manrope"
+                      SelectionChanged="TipoComboBox_SelectionChanged"/>
+            <ComboBox x:Name="EncargadoComboBox"
+                      ItemsSource="{Binding Path=ListaEmpleados}" 
+                      SelectedItem="{Binding Path=EncargoSeleccionado.idEncargado}" 
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                      materialDesign:HintAssist.Hint="Encargado" 
+                      Margin="5" 
+                      Width="350"
+                      FontFamily="Manrope">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding nombre}" FontFamily="Manrope"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox ItemsSource="{Binding Path=ListaPrioridad}"
+                      SelectedValue="{Binding Path=EncargoSeleccionado.prioridad}"  
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                      materialDesign:HintAssist.Hint="Prioridad" 
+                      Margin="5" 
+                      Width="350"
+                      FontFamily="Manrope"/>
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                     materialDesign:HintAssist.Hint="Porcentaje" 
+                     Margin="5" 
+                     Width="350"
+                     FontFamily="Manrope">
+                <Binding Path="EncargoSeleccionado.porcentaje" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:PercentageValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <DockPanel Margin="10" Width="350">
+                <TextBlock Text="Equipo" 
+                           DockPanel.Dock="Top" 
+                           Margin="5" 
+                           FontFamily="Manrope" 
+                           FontSize="16"/>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Command="{Binding Path=AbrirDialogoCommand}" Margin="5">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
+                                <Setter Property="IsEnabled" Value="True"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=EncargoSeleccionado.tipo}" Value="{x:Null}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <materialDesign:PackIcon Kind="Add"/>
+                    </Button>
+                    <Button Command="{Binding Path=DeleteEmpleadoCommand}" Margin="5">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
+                                <Setter Property="IsEnabled" Value="True"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=EncargoSeleccionado.tipo}" Value="{x:Null}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <materialDesign:PackIcon Kind="Delete"/>
+                    </Button>
+                </StackPanel>
+                <ListBox Margin="5" 
+                         MaxHeight="200" 
+                         ItemsSource="{Binding Path=EncargoSeleccionado.empleadosCollection}" 
+                         SelectedItem="{Binding Path=EmpleadoEncargoSeleccionado}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="White" 
+                                    BorderThickness="0" 
+                                    Width="320" 
+                                    Background="#FF06557F" 
+                                    CornerRadius="2" 
+                                    Margin="-5">
+                                <DockPanel>
+                                    <Image Width="50" Height="50" DockPanel.Dock="Left" Margin="10,10,10,10">
+                                        <Image.Style>
+                                            <Style>
+                                                <Setter Property="Image.Source" Value="{Binding Path=imagen}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=imagen}" Value="{x:Null}">
+                                                        <Setter Property="Image.Source" Value="/Imagenes/Imagen_SinFoto.jpg"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                        <Image.Clip>
+                                            <EllipseGeometry Center="25,25" RadiusX="25" RadiusY="25"/>
+                                        </Image.Clip>
+                                    </Image>
+                                    <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
+                                        <TextBlock FontFamily="Manrope" Foreground="White">
+                                            <Run Text="{Binding Path=nombre}"/>
+                                        </TextBlock>
+                                        <TextBlock FontFamily="Manrope" Foreground="White">
+                                            <Run Text="{Binding Path=codcategoriaProfesional.descripcion}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DockPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Enviar" 
+                        Margin="5" 
+                        Command="{Binding Path=EditCommand}" 
+                        FontFamily="Manrope"/>
+                <Button Content="Cancelar" 
+                        IsCancel="True" 
+                        Margin="5"  
+                        Command="{Binding Path=BackCommand}" 
+                        FontFamily="Manrope"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,167 @@
+﻿<UserControl x:Class="ProyectoRefriPolar.View.Page.Edit.EmpleadoEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:validation="clr-namespace:ProyectoRefriPolar.Validaciones"
+             xmlns:local="clr-namespace:ProyectoRefriPolar.View.Page.Edit"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="900">
+    <UserControl.Resources>
+        <Style x:Key="empleadoImagen" TargetType="{x:Type Image}">
+            <Setter Property="Image.Source" Value="{Binding Path=EmpleadoSeleccionado.imagen}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=EmpleadoSeleccionado.imagen}" Value="{x:Null}">
+                    <Setter Property="Image.Source" Value="/Imagenes/Imagen_SinFoto.jpg"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White" VerticalAlignment="Center">
+            <Label Content="Editar Empleado" 
+                   FontFamily="Manrope" 
+                   FontSize="50" 
+                   HorizontalAlignment="Center"/>
+            <Image Width="250" 
+                   Height="250" 
+                   Style="{StaticResource empleadoImagen}" 
+                   Margin="5" 
+                   MouseDown="Image_MouseDown">
+                <Image.Clip>
+                    <EllipseGeometry Center="125,125" RadiusX="125" RadiusY="125"/>
+                </Image.Clip>
+            </Image>
+            <UniformGrid Columns="2" HorizontalAlignment="Center" Width="850">
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                         materialDesign:HintAssist.Hint="Nombre" 
+                         Margin="5" 
+                         Width="350" 
+                         FontFamily="Manrope">
+                    <Binding Path="EmpleadoSeleccionado.nombre" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:EmptyValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                         materialDesign:HintAssist.Hint="Apellidos" 
+                         Margin="5" 
+                         Width="350"
+                         FontFamily="Manrope">
+                    <Binding Path="EmpleadoSeleccionado.apellido1" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:EmptyValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                         materialDesign:HintAssist.Hint="Correo" 
+                         Margin="5" 
+                         Width="350"
+                         FontFamily="Manrope">
+                    <Binding Path="EmpleadoSeleccionado.mail" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:EmailValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                         materialDesign:HintAssist.Hint="Telefono"
+                         Margin="5" 
+                         Width="350"
+                         FontFamily="Manrope">
+                    <Binding Path="EmpleadoSeleccionado.telefono" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:PhoneValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                         materialDesign:HintAssist.Hint="Direccion" 
+                         Margin="5" 
+                         Width="350"
+                         FontFamily="Manrope">
+                    <Binding Path="EmpleadoSeleccionado.direccion" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:EmptyValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         materialDesign:HintAssist.Hint="Ciudad" 
+                         Margin="5" 
+                         Width="350"
+                         FontFamily="Manrope">
+                    <Binding Path="EmpleadoSeleccionado.ciudad" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:EmptyValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                         materialDesign:HintAssist.Hint="Provincia" 
+                         Margin="5" 
+                         Width="350"
+                         FontFamily="Manrope">
+                    <Binding Path="EmpleadoSeleccionado.provincia" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:EmptyValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                         materialDesign:HintAssist.Hint="Codigo Postal" 
+                         Margin="5" 
+                         Width="350"
+                         FontFamily="Manrope">
+                    <Binding Path="EmpleadoSeleccionado.cp" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:CodigoPostalValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                         materialDesign:HintAssist.Hint="Salario" 
+                         Margin="5" 
+                         Width="350"
+                         FontFamily="Manrope">
+                    <Binding Path="EmpleadoSeleccionado.salario" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:EmptyValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <ComboBox ItemsSource="{Binding Path=ListaAntiguedad}" 
+                          SelectedItem="{Binding Path=EmpleadoSeleccionado.antiguedad}" 
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                          materialDesign:HintAssist.Hint="Antigüedad" 
+                          Margin="5" 
+                          Width="350"
+                          FontFamily="Manrope"/>
+                <ComboBox ItemsSource="{Binding Path=ListaCategoriasProfesionales}" 
+                        SelectedItem="{Binding Path=EmpleadoSeleccionado.codcategoriaProfesional}" 
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                        materialDesign:HintAssist.Hint="Categoria Profesional" 
+                        Margin="5" 
+                        Width="350"
+                        FontFamily="Manrope">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock FontFamily="Manrope">
+                              <Run Text="{Binding descripcion, StringFormat='{}{0}, '}"/>
+                              <Run Text="{Binding encargo}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <CheckBox Content="Reconocimiento medico" IsChecked="{Binding Path=EmpleadoSeleccionado.reconocimientoMedico}" Width="350" FontFamily="Manrope"/>
+            </UniformGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Enviar" Margin="5" Command="{Binding Path=EditCommand}" FontFamily="Manrope"/>
+                <Button Content="Cancelar" IsCancel="True" Margin="5" Command="{Binding Path=BackCommand}" FontFamily="Manrope"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

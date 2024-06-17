@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\Manrope-VariableFont_wght.ttf" />
+    <None Remove="Imagenes\ajuste.png" />
+    <None Remove="Imagenes\Blue minimalist snowflake logo.png" />
+    <None Remove="Imagenes\boton-mas.png" />
+    <None Remove="Imagenes\casco.png" />
+    <None Remove="Imagenes\client.png" />
+    <None Remove="Imagenes\CopoDeNieve2.5-removebg-preview.png" />
+    <None Remove="Imagenes\iconApp.ico" />
+    <None Remove="Imagenes\iconoApp.png" />
+    <None Remove="Imagenes\iconoApp2.5.png" />
+    <None Remove="Imagenes\image.png" />
+    <None Remove="Imagenes\Imagen_SinFoto.jpg" />
+    <None Remove="Imagenes\obra.png" />
+    <None Remove="Imagenes\Ojo.png" />
+    <None Remove="Imagenes\Papelera.png" />
+    <None Remove="Imagenes\persona.png" />
+    <None Remove="Imagenes\phone.png" />
+    <None Remove="Imagenes\Phone_White.png" />
+    <None Remove="Imagenes\reparacion.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\Manrope-VariableFont_wght.ttf" />
+    <Resource Include="Imagenes\ajuste.png" />
+    <Resource Include="Imagenes\Blue minimalist snowflake logo.png" />
+    <Resource Include="Imagenes\boton-mas.png" />
+    <Resource Include="Imagenes\casco.png" />
+    <Resource Include="Imagenes\client.png" />
+    <Resource Include="Imagenes\CopoDeNieve2.5-removebg-preview.png" />
+    <Resource Include="Imagenes\iconApp.ico" />
+    <Resource Include="Imagenes\iconoApp.png" />
+    <Resource Include="Imagenes\iconoApp2.5.png" />
+    <Resource Include="Imagenes\image.png" />
+    <Resource Include="Imagenes\Imagen_SinFoto.jpg" />
+    <Resource Include="Imagenes\obra.png" />
+    <Resource Include="Imagenes\Ojo.png" />
+    <Resource Include="Imagenes\Papelera.png" />
+    <Resource Include="Imagenes\persona.png" />
+    <Resource Include="Imagenes\phone.png" />
+    <Resource Include="Imagenes\Phone_White.png" />
+    <Resource Include="Imagenes\reparacion.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

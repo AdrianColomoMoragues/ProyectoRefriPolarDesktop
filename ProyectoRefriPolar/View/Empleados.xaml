@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="ProyectoRefriPolar.View.Empleados"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:ProyectoRefriPolar.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="empleadoImagen" TargetType="{x:Type Image}">
+            <Setter Property="Image.Source" Value="{Binding Path=imagen}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=imagen}" Value="{x:Null}">
+                    <Setter Property="Image.Source" Value="/Imagenes/Imagen_SinFoto.jpg"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Manrope"/>
+        </Style>
+    </UserControl.Resources>
+    <DockPanel>
+        <materialDesign:Card DockPanel.Dock="Top" 
+                    HorizontalAlignment="Right"
+                    Height="50" 
+                    Margin="0,15,30,0"
+                    Background="White"
+                    BorderBrush="#2f9cfa"
+                    BorderThickness="1">
+            <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Center">
+                <TextBox x:Name="textSearch" 
+                    KeyUp="textSearch_KeyUp" 
+                    materialDesign:HintAssist.Hint="Search..."
+                    CaretBrush="Black"
+                    Background="White"
+                    Height="45"
+                    Width="280"
+                    Foreground="Black"
+                    Margin="10"
+                    Padding="5"
+                    FontSize="16"
+                    FontFamily="Manrope"/>
+                <materialDesign:PackIcon Kind="Search" 
+                    VerticalAlignment="Center" 
+                    Width="25" 
+                    Height="25" 
+                    HorizontalAlignment="Left"
+                    Margin="10"/>
+            </StackPanel>
+        </materialDesign:Card>
+        <DockPanel Margin="20" DockPanel.Dock="Bottom">
+            <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                        Command="{Binding Path=CrearEmpleadoCommand}"
+                        Margin="10"
+                        Height="50" 
+                        Width="50">
+                        <materialDesign:PackIcon Kind="Add" Width="30" Height="30"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+            <ListBox Name="listSearchRearch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Path=ListaEmpleados}" SelectedItem="{Binding Path=EmpleadoSeleccionado}" BorderBrush="Transparent">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" Value="True">
+                                <Setter Property="IsSelected" Value="True" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card Background="#1CABE7">
+                            <DockPanel>
+                                <DockPanel LastChildFill="False" DockPanel.Dock="Bottom" VerticalAlignment="Center">
+                                    <TextBlock DockPanel.Dock="Top" Margin="5" Foreground="White">
+                                    <Run Text="{Binding Path=apellido1}"/>
+                                    <Run Text="{Binding Path=apellido2, StringFormat='{}{0}, '}"/>
+                                    <Run Text="{Binding Path=nombre}"/>
+                                    </TextBlock>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Bottom">
+                                        <Button
+                                            Command="{Binding DataContext.ConsultaEmpleadoCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                            CommandParameter="{Binding}"
+                                            BorderBrush="Transparent"
+                                            Background="Transparent">
+                                            <materialDesign:PackIcon Kind="Eye" Width="20" Height="20"/>
+                                        </Button>
+                                        <Button
+                                        Margin="0,0,0,0"
+                                        Command="{Binding DataContext.EliminarCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                        CommandParameter="{Binding}"
+                                        BorderBrush="Transparent"
+                                        Background="Transparent">
+                                            <materialDesign:PackIcon Kind="Delete" Height="20" Width="20"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DockPanel>
+                                <Image Width="180" Height="180" Style="{StaticResource empleadoImagen}" DockPanel.Dock="Top" VerticalAlignment="Center" Margin="10">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="90,90" RadiusX="90" RadiusY="90" />
+                                    </Image.Clip>
+                                </Image>
+                            </DockPanel>
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ListBox>
+        </DockPanel>
+    </DockPanel>
+</UserControl>
